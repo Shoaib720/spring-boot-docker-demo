@@ -1,3 +1,4 @@
+# Build Stage
 FROM maven:3.8.7-amazoncorretto-17 as build
 WORKDIR /app
 COPY pom.xml .
@@ -5,6 +6,8 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn package -DskipTests
 
+
+# Deploy Stage
 FROM amazoncorretto:17
 ENV PROFILE=dev
 WORKDIR /tmp
